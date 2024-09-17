@@ -1,0 +1,360 @@
+---
+title: "Workbook 1"
+author: "Name"
+date: "21 January, 2022"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+First, let's create a code chunk and load some packages.
+
+
+
+## Learning outcomes
+
+1.  Explore R Studio environment
+2.  Create/Edit/Knit Markdown workbooks
+3.  Use packages
+4.  Perform arithmetic operations and built-in functions and constants
+5.  Learn about variables
+6.  Learn about vectors
+
+## 4. Arithmetic operations and built-in functions and constants
+
+R understands the following basic operators:
+
+-   \+  and - for addition and subtraction
+
+-   \*   and / for multiplication and division
+
+-   \^ for exponents
+
+-   %% is the modulo operator
+
+-   %/% for integer division
+
+Run the following chunk and observe different answers (explain, why are
+they different)
+
+```{r}
+1+7/3
+
+1+7%%3
+
+1+7%/%3
+
+```
+
+Below is an excerpt of some of the basic mathematical functions *R*
+knows.
+
+-   log() -- computes logarithms;
+
+-   exp() -- computes the exponential function;
+
+-   sqrt() -- takes the square root;
+
+-   abs() -- returns the absolute value;
+
+-   sin() -- returns the sine;
+
+-   cos() -- returns the cosine;
+
+-   tan() -- returns the tangent;
+
+-   asin() -- returns the arc-sine;
+
+-   factorial() -- returns the factorial;
+
+-   sign() -- returns the sign (negative or positive);
+
+-   round() -- rounds the input to the desired digit.
+
+In addition to functions R has a small number of built-in constants:
+
+-   LETTERS - the 26 upper-case letters of the Roman alphabet;
+
+-   letters - the 26 lower-case letters of the Roman alphabet;
+
+-   month.abb - the three-letter abbreviations for the English month
+    names;
+
+-   month.name - the English names for the months of the year;
+
+-   pi - the ratio of the circumference of a circle to its diameter.
+
+Run the following chunk
+
+```{r}
+LETTERS
+
+sin(pi/2)
+
+factorial(4)
+
+sign(-125)
+
+month.name
+
+```
+
+#### Exercise 1.4
+
+Create a new chunk below this task and:
+
+-   find the sum of squares of any 5 consequent integer numbers;
+
+-   calculate the sum of the first 4 elements of MacLaurin series
+    expansion for exponent function $e^x$ at the point x=2;
+
+-   calculate $e^x$ at the point x=2 using R function *exp()* and
+    compare to the previous result;
+
+-   Let x be a number greater than 0. What are the results of the
+    following operations?\
+    Try to guess the answer at first, then evaluate these expressions by
+    substituting x with any integer number\
+
+    -   0/x\
+    -   x/0\
+    -   0/(x-x)
+```{r}
+q1<-1^2+2^2+3^2+4^2+5^2
+paste( "5 consequent integer are 1 to 5,the sum of is:",q1)
+#since any derivative of e^x is still e^x, the result is:
+q2<-(exp(1))^0/factorial(0)*2^0+(exp(1))^0/factorial(1)*2^1+(exp(1))^0/factorial(2)*2^2+(exp(1))^0/factorial(3)*2^3
+paste( "the sum is:",q2)
+q3<-exp(2)
+paste( "e^x at the point x=2 is:",q3,"         the difference between them is",q3-q2)
+0/2
+2/0
+0/(2-2)
+
+```
+
+## 5. Variables
+
+Briefly speaking, a variable defines a place in the computer memory
+where you keep some value. Values could be of different type: numbers
+(Integer, Floating point (Real), Long Decimal etc.), characters
+(String), or logical (Boolean).
+
+To assign a value to a variable in R you use an arrow, lie "\<-". The
+arrow points from the data you want to store towards the name you want
+to store it under. For example,
+
+```{r}
+a <- 8 + 3
+```
+
+If R has performed this command successfully you will not see any
+output, as the value of 8 + 3 has been saved to the data structure
+called *a*. However, you can see that x variable has appeared in the
+Environment window. You can access and use this value at any time and
+can print the value of a.
+
+Run the following chunk, observe that there are only 3 values printed
+(Why?)
+
+```{r}
+a
+a^2
+b <- a%/%3
+log(x = 10, base = 10)
+```
+
+You can also display this value by using *print()* function:
+
+```{r}
+print(a)
+print(b)
+```
+
+You can combine several commands on one line separated by semi-colon:
+
+```{r}
+print(a); print(b); a+b
+```
+
+Another useful symbol is *hash* (\#). It denotes beginning of the line
+comments:
+
+```{r}
+exp(5)
+round(exp(5),digits= 2)   # e^5 rounded to the nearest 0.01
+round(exp(5),digits=-1)  # e^5 rounded to the nearest 10
+```
+
+If you do not know or do not remember the proper syntax of some
+function, then you can either use Google or to use internal help by
+typing question mark followed by the name of the function:
+
+```{r}
+?log()
+```
+
+For some functions, especially basic operators, ? may not work. In those
+cases you can use the *help()* function:
+
+```{r}
+help("%/%")
+```
+
+#### Exercise 1.5
+
+-   Create a new chunk.
+
+-   Choose 4 numbers (integer or real), assign these values to variables
+    named *a, b ,c, d* and calculate the following expressions:\
+    $expression1=a+b \cdot c-d^d$\
+    $expression2=a+(b \cdot c-d)^d$\
+    $expression3=(a+b)\cdot c-d^d$\
+    $expression4=a+b \cdot (c-d)^d$
+
+```{r}
+a <--1
+b <-3.2
+c <-4.1
+d <-2
+print("take a=-1,b=3.2,c=4.1,d=2.The result is:")
+expression1=a+b*c-d^d
+expression2=a+(b*c-d)^d
+expression3=(a+b)*c-d^d
+expression4=a+b*(c-d)^d
+
+expression1
+expression2
+expression3
+expression4
+
+```
+
+
+## 6. Vectors
+
+There are several ways in R to create an array of values.
+The easiest way to use the *c()* function. The “c???stands for concatenate, and you can string a bunch of elements
+together, separated by commas.
+
+```{r}
+Vector1 <- c(1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10)
+
+x <- c(65, 73, 54, 47, 90, 30, 44, 66, 77, 62)
+```
+
+You can perform arithmetic operations on all elemts.
+For example, you can add a scalar (a number) to all elements or  square each entry:
+
+```{r}
+x + 2
+x^2
+```
+
+#### Exercise 1.6.1
+
+The weights of five people before and after a diet programme are given
+as two arrays: Before: [78 72 78 79 105] After: [67 65 79 70 93] 
+
+- Create a new chunk
+
+- Create two vectors 'before' and 'after' and assign the corresponding values to them.  
+
+- Calculate the difference between the values for each person.
+
+```{r}
+before <- c(78, 72, 78, 79, 105)
+after <- c(67, 65, 79, 70, 93)
+print("They lose weight respect:")
+before-after
+
+```
+
+
+Some useful vectors can be created quickly. The colon operator (:) is used
+to generate a sequences of integer values with step 1 or -1 depending on the first and the last values
+
+```{r}
+c1 <- 1:10
+c1
+c2<- -3:4
+c2
+c3<- 9:5
+c3
+```
+
+Any arithmetic progression can be generated by *seq()* function
+
+```{r}
+seq(from=2, to=6, by=0.4)
+
+seq(from=-1, to=1, length=6)
+```
+
+Sometimes it's necessary to have repeated values, for which we use *rep()*
+
+```{r}
+rep(5,3)
+
+rep(2:5,each=3)
+rep(-1:3, length.out=10)
+```
+
+We can also use R's vectorization to create more sequences:
+
+```{r}
+2^(0:10)
+
+1:3 + rep(seq(from=0,by=10,to=30), each=3)
+```
+
+If we perform a binary operation (such as +) on two vectors of different
+lengths, the shorter one is used over and over again until the operation
+has been applied to every entry in the longer one - this is called
+recycling.
+
+If the longer length is not a multiple of the shorter length, a warning
+is given.
+
+```{r}
+1:10 * c(-1,1)
+
+1:7* 1:2 # this line will rise a warning
+```
+
+#### Exercise 1.6.2
+
+Try to create the following vectors using rep() and seq() functions:
+
+- 1, 1.5, 2, 2.5, . . . , 12;
+
+- 1, 8, 27, 64, . . . , 1000; 
+
+- 1, -1/2,1/3, -1/4, . . . , -1/100;
+
+- 1, 0, 3, 0, 5, 0, 7, . . . , 0, 49.
+```{r}
+library(MASS)
+
+print("Vector 1 is:")
+seq(from=1, to=12, by=0.5)
+print("Vector 2 is:")
+(1:10)^(3)
+print("Vector 3 is:")
+fractions(1/rep(1:100, length.out=100)* c(1,-1))
+print("Vector 4 is:")
+seq(from=1, to=49, by=1)* c(1,0)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#library(tidyverse)
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+#library(readxl)
+```
