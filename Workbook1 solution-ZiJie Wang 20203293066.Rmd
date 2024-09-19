@@ -13,7 +13,7 @@ editor_options:
 
 First, let's create a code chunk and load some packages.
 
-
+22
 
 ## Learning outcomes
 
